@@ -1,7 +1,6 @@
 package com.company.BehaivoursPack.FMS;
 
 import jade.core.behaviours.Behaviour;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
 public class EsperarRespuesta extends Behaviour {
@@ -12,8 +11,9 @@ public class EsperarRespuesta extends Behaviour {
     @Override
     public void action() {
         ACLMessage msg = myAgent.receive();
+
         if (msg != null){
-            System.out.println("Recibí la respuesta a mi propuesta");
+            System.out.println("Recibí la respuesta a mi propuesta: '" + msg.getContent() + "'");
             recibido = true;
             if (msg.getContent().equals("No me gusta")){
                 this.respuesta = 0;
@@ -21,8 +21,9 @@ public class EsperarRespuesta extends Behaviour {
                 this.respuesta = 1;
             }
         }else { //espero por el mensaje
-            block();    //block() es el metodo correcto ?
+            block();
         }
+
     }
 
     @Override
@@ -33,7 +34,6 @@ public class EsperarRespuesta extends Behaviour {
     @Override
     public void reset() {
         recibido = false;
-        super.reset();
     }
 
     @Override

@@ -18,9 +18,10 @@ public class MyFSM extends FSMBehaviour {
 
         //Iniciamos Lista de Comidas// eventualmente podria llegar por parametro
         ArrayList<String> list = new ArrayList<>();
-        list.add("salchipapa");
+        list.add("fideos con tuco");
+        list.add("guiso de lentejas");
         list.add("milanesa de soja");
-        list.add("pastel de polenta");
+        list.add("pizza napolitana");
 
         DataStore ds = new DataStore();
         eFin.setDataStore(ds);
