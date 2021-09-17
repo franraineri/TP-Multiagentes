@@ -16,11 +16,19 @@ public class Proponer extends Behaviour {
     @Override
     public void action() {
         // Armo el mensaje
-        ACLMessage req = new ACLMessage(ACLMessage.REQUEST);
-        req.addReceiver(new AID("Receiver",AID.ISLOCALNAME));
+        ACLMessage propuesta = new ACLMessage(ACLMessage.REQUEST);
         ArrayList <String> comidas = (ArrayList<String>) this.getDataStore().get("comidas");
-        req.setContent("Te prepongo pedir para comer " + comidas.get((int) (Math.random() * comidas.size())) );
-
+        
+        propuesta.addReceiver(new AID("Receiver",AID.ISLOCALNAME));
+        
+        if (!comidas.isEmpty()){
+            System.out.println( "Cantidad de comidas en la db: "+comidas.size());
+            propuesta.setContent( "Te prepongo pedir para comer " + comidas.remove((int) (Math.random() * comidas.size()))); 
+        }
+        else {
+            propuesta.setPerformative(ACLMessage.FAILURE);
+            propuesta.setContent(" No tengo nada mas para ofrecerte ");
+        }
         //Envio de REQUEST//
         myAgent.send(req);
     }

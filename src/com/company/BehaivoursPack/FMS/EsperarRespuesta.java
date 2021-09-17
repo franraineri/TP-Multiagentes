@@ -13,20 +13,21 @@ public class EsperarRespuesta extends Behaviour {
     public void action() {
         ACLMessage msg = myAgent.receive();
         if (msg != null){
+            System.out.println("Recibí la respuesta a mi propuesta");
             recibido = true;
             if (msg.getContent().equals("No me gusta")){
-                respuesta = 0;
+                this.respuesta = 0;
             } else {
-                respuesta = 1;
+                this.respuesta = 1;
             }
         }else { //espero por el mensaje
-            block();
+            block();    //block() es el metodo correcto ?
         }
     }
 
     @Override
     public int onEnd() {
-        return respuesta;
+        return this.respuesta;
     }
 
     @Override

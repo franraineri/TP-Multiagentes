@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class BehaviourResponder extends Behaviour {
 
 	private boolean recibido = false;
-	private boolean loRecibi = false;
 	private ArrayList<String> Respuestas;
+	public float prob = 0.1;	//probabilidad de que salga "no me gusta" | "me gusta"
 
 	public BehaviourResponder (){
 		ArrayList<String> Respuestas = new ArrayList<String>(){{
@@ -26,9 +26,12 @@ public class BehaviourResponder extends Behaviour {
 		if (msg != null) { // Si recibi el mensaje, lo proceso
 			System.out.println("Mensaje Recibido: " + msg.getContent());
 
-			loRecibi = true;
+			if(Math.random() > prob){
+				String Respuesta = Respuestas.get(1);
+			}
+			System.out.println(Respuesta);
 
-			String Respuesta = Respuestas.get((int) (Math.random() * Respuestas.size()));
+			recibido = true;
 
 			ACLMessage resp = msg.createReply();
 			resp.setPerformative(ACLMessage.INFORM);
@@ -36,11 +39,10 @@ public class BehaviourResponder extends Behaviour {
 
 			System.out.println(Respuesta + " la comida " + msg.getContent());
 
-			// Envio la respuesta
-			myAgent.send(resp);
+			myAgent.send(resp); // Envio la respuesta a la propuesta
 		}
 		else
-			block(); // Si no lo recibi, se bloquea el comportamiento
+			block(); 	// Si no lo recibi, se bloquea el comportamiento
 	}
 
 	//PARA NOSOTROS Verificar en caso de que no funcione//
@@ -52,7 +54,7 @@ public class BehaviourResponder extends Behaviour {
 
 	@Override
 	public boolean done() {
-		return loRecibi;
+		return recibido;
 	}
 
 
