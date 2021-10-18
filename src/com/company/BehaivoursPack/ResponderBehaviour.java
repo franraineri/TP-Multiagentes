@@ -20,18 +20,20 @@ public class ResponderBehaviour extends Behaviour {
 		ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
 
 		if (msg != null) { // Si recibi el mensaje, lo proceso
+			recibido = true;
 			System.out.println("Mensaje Recibido: '" + msg.getContent() + "'");
 			String Respuesta;
-
-			if(Math.random() > prob){
-				Respuesta = Respuestas.get(1);
-			} else
-				Respuesta = Respuestas.get(0);
-
-			recibido = true;
-
+			
 			ACLMessage resp = msg.createReply();
-			resp.setPerformative(ACLMessage.INFORM);
+			if(Math.random() > prob){
+				Respuesta = Respuestas.get(0);
+				resp.setPerformative(ACLMessage.REJECT_PROPOSAL);	
+				this.reset();
+			} else{
+				Respuesta = Respuestas.get(1);
+				resp.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
+			}
+
 			resp.setContent(Respuesta);
 
 			System.out.println(Respuesta + " esa");

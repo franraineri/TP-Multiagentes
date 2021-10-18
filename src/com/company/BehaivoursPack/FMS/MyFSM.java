@@ -38,6 +38,7 @@ public class MyFSM extends FSMBehaviour {
         //registro de las trancisiones del FMS
         this.registerDefaultTransition(Inicio, Intermedio);
         this.registerTransition(Intermedio, Inicio,0); //Si no acepta responder//
+        this.eInt.reset();  //revisar 
         this.registerTransition(Intermedio,Final,1);    //Si acepta responder//
     }
 }

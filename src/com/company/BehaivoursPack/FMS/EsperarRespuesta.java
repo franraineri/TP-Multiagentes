@@ -13,14 +13,21 @@ public class EsperarRespuesta extends Behaviour {
         ACLMessage msg = myAgent.receive();
 
         if (msg != null){
-            System.out.println("Recibí la respuesta a mi propuesta: '" + msg.getContent() + "'");
             recibido = true;
-            if (msg.getContent().equals("No me gusta")){
+            System.out.println("Recibí la respuesta a mi propuesta: '" + msg.getContent() + "'");
+            
+            if (msg.getPerformative() == ACLMessage.ACCEPT_PROPOSAL)    //corregirlo en IntelliJ
                 this.respuesta = 0;
-            } else {
-                this.respuesta = 1;
+                // this.reset();  //probar en intelli J
+            else { 
+                if (msg.getPerformative() == ACLMessage.REJECT_PROPOSAL){    //corregirlo en IntelliJ
+                    this.respuesta = 1;
+                } else {
+                    this.respueta = -1;
+                    System.out.println("El mensaje recibido no acepta ni rechaza mi propuesta");
+                }
             }
-        }else { //espero por el mensaje
+        } else { //espero por el mensaje
             block();
         }
 
@@ -33,6 +40,7 @@ public class EsperarRespuesta extends Behaviour {
 
     @Override
     public void reset() {
+        super.reset();
         recibido = false;
     }
 
