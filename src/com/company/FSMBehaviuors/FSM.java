@@ -18,6 +18,7 @@ public class FSM extends FSMBehaviour{
 	private static final String ACUERDO = null;
 	private static final String CONFLICTO = null;
 
+
 	// CONTRUCTOR DEL INICIATOR
 	public FSM(AID aid, boolean iniciador) {
 		DataStore ds = new DataStore();
@@ -80,19 +81,22 @@ public class FSM extends FSMBehaviour{
 		this.registerLastState(conflicto, CONFLICTO);
 		
 		// Definir transiciones
-		
+
 		this.registerTransition(ENVIAR_PROPUESTA, ESPERAR_RESPUESTA, 0);
 		this.registerTransition(ENVIAR_PROPUESTA, CONFLICTO, 1); // No tengo mas propuestas y debo conceder
-		
-		this.registerTransition(ESPERAR_RESPUESTA, ENVIAR_ZEUTHEN, 0); // Reject
-		this.registerTransition(ESPERAR_RESPUESTA, ACUERDO, 1); // Accept
-		
+
+		String[] resets_1= {ESPERAR_RESPUESTA};
+		this.registerTransition(ESPERAR_RESPUESTA, ENVIAR_ZEUTHEN, 0, resets_1); // Reject
+		this.registerTransition(ESPERAR_RESPUESTA, ACUERDO, 1, resets_1); // Accept
+
+		String[] resets_2= {RECIBIR_ZEUTHEN};
 		this.registerDefaultTransition(ENVIAR_ZEUTHEN, RECIBIR_ZEUTHEN);
-		this.registerTransition(RECIBIR_ZEUTHEN, ESPERAR_PROPUESTA, 0); 	// Mi Z es Mayor
-		this.registerTransition(RECIBIR_ZEUTHEN, ENVIAR_PROPUESTA, 1); 	// Mi Z es Menor
-		
-		this.registerTransition(ESPERAR_PROPUESTA, EVALUAR_PROPUESTA, 0); // Recibi propuesta
-		this.registerTransition(ESPERAR_PROPUESTA, CONFLICTO, 1); // Recibi Cancel
+		this.registerTransition(RECIBIR_ZEUTHEN, ESPERAR_PROPUESTA, 0, resets_2); 	// Mi Z es Mayor
+		this.registerTransition(RECIBIR_ZEUTHEN, ENVIAR_PROPUESTA, 1, resets_2); 	// Mi Z es Menor
+
+		String[] resets_3= {ESPERAR_PROPUESTA};
+		this.registerTransition(ESPERAR_PROPUESTA, EVALUAR_PROPUESTA, 0, resets_3); // Recibi propuesta
+		this.registerTransition(ESPERAR_PROPUESTA, CONFLICTO, 1, resets_3); // Recibi Cancel
 		
 		this.registerTransition(EVALUAR_PROPUESTA, ENVIAR_ZEUTHEN, 0); // Reject
 		this.registerTransition(EVALUAR_PROPUESTA, ACUERDO, 1); // Accept

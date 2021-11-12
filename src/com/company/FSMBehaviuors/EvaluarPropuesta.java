@@ -15,21 +15,6 @@ public class EvaluarPropuesta extends Behaviour {
 	private int event;
 	@Override
 	public void action() {
-		// ACLMessage resp = msg.createReply();
-		// 	if(Math.random() > prob){
-		// 		Respuesta = Respuestas.get(0);
-		// 		resp.setPerformative(ACLMessage.REJECT_PROPOSAL);	
-		// 		this.reset();
-		// 	} else{
-		// 		Respuesta = Respuestas.get(1);
-		// 		resp.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-		// 	}
-
-		// 	resp.setContent(Respuesta);
-
-		// 	System.out.println(Respuesta + " esa");
-
-		// 	myAgent.send(resp); // Envio la respuesta a la propuesta
 
 		//LA PROPUESTA DEBE TOMARSE DESDE EL DATASTORE
 

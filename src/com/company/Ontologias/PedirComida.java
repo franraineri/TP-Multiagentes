@@ -7,11 +7,12 @@ public class PedirComida implements AgentAction {
     private String LUGAR;
     private Comida COMIDA;
 
-    public PedirComida() {
-    }
-
     public PedirComida(String LUGAR, Comida COMIDA) {
         this.LUGAR = LUGAR;
+        this.COMIDA = COMIDA;
+    }
+
+    public PedirComida( Comida COMIDA) {
         this.COMIDA = COMIDA;
     }
 

@@ -27,6 +27,8 @@ public class EsperarRespuesta extends Behaviour {
                     System.out.println("El mensaje recibido no acepta ni rechaza mi propuesta");
                 }
             }
+            getDataStore().put("last_message", msg);
+
         } else { //espero por el mensaje
             block();
         }

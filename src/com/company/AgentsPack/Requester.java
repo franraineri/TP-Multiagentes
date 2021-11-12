@@ -5,8 +5,6 @@ import jade.content.lang.Codec;
 import jade.content.lang.sl.SLCodec;
 import jade.content.onto.Ontology;
 import jade.core.Agent;
-import jade.core.AID;
-import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -15,11 +13,14 @@ import jade.lang.acl.ACLMessage;
 import jade.proto.SubscriptionInitiator;
 import com.company.Ontologias.*;
 
-public class Requester extends Agent {
+import java.util.HashMap;
+import java.util.Map;
+
+public class Requester extends AgenteNegociador {
     
     private Codec codec = new SLCodec();
     private Ontology MCP = MCPOntology.getInstance();
-    
+
     @Override
     protected void setup(){
         System.out.println("Requester agent "+getAID().getName()+" is ready");
@@ -37,7 +38,8 @@ public class Requester extends Agent {
 			DFAgentDescription[] result = DFService.search(this, template);
 			if (result.length > 0) {
                 System.out.println("Found the following agents:" + result[0].getName());
-                this.addBehaviour(new FSM(getAID(), true));
+                this.addBehaviour(new FSM(result[0].getName(), true));
+
             } else {
 				addBehaviour( new SubscriptionInitiator( this,
 						        DFService.createSubscriptionMessage( this, getDefaultDF(), 
@@ -48,7 +50,7 @@ public class Requester extends Agent {
                                         DFAgentDescription[] result =
                                             DFService.decodeNotification(inform.getContent());
                                         if (result[0].getAllServices().hasNext())
-                                            addBehaviour(new NumberInitiatorBehaviour(result[0].getName()));
+                                            addBehaviour(new FSM(result[0].getName(), true));
                                     }
                                     catch (FIPAException fe) {fe.printStackTrace(); }
                                 }
