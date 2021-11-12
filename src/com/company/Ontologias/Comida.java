@@ -1,3 +1,5 @@
+package com.company.Ontologias;
+
 import jade.content.Concept;
 //class Comida with atributes NOMBRE_COMIDA , TIPO_COMIDA , and INGREDIENTES
 

@@ -1,3 +1,5 @@
+package com.company.Ontologias;
+
 import jade.content.Predicate;
 
 public class EsMiZeuthen implements Predicate{
@@ -14,7 +16,7 @@ public class EsMiZeuthen implements Predicate{
         this.zeuthen = zeuthen;
     }
     
-    public String getZeuthen() {
+    public float getZeuthen() {
         return zeuthen;
     }
     

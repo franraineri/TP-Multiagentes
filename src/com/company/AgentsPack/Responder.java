@@ -1,6 +1,11 @@
 package com.company.AgentsPack;
 
-import com.company.BehaivoursPack.ResponderBehaviour;
+import com.company.FSMBehaviuors.EsperarPropuestaInicial;
+import com.company.FSMBehaviuors.FSM;
+import com.company.Ontologias.MCPOntology;
+import jade.content.lang.Codec;
+import jade.content.lang.sl.SLCodec;
+import jade.content.onto.Ontology;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -11,7 +16,7 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 public class Responder extends Agent {
 
 	private Codec codec = new SLCodec();
-	private Ontology mcp = MCPOntology.getInstance(); 
+	private Ontology mcp = MCPOntology.getInstance();
 
 	@Override
 	protected void setup() {
@@ -35,7 +40,7 @@ public class Responder extends Agent {
 			fe.printStackTrace();
 		}
 
-		this.addBehaviour(new MyFSM());
+		this.addBehaviour(new EsperarPropuestaInicial());
 	}
 
 	@Override

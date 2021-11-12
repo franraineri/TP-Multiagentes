@@ -1,3 +1,5 @@
+package com.company.Ontologias;
+
 import jade.content.lang.sl.SLCodec;
 import jade.content.onto.BasicOntology;
 import jade.content.onto.Ontology;

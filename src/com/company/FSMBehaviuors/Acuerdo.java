@@ -1,4 +1,4 @@
-package beh;
+package com.company.FSMBehaviuors;
 
 import jade.core.behaviours.Behaviour;
 

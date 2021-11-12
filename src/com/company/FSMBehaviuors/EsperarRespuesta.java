@@ -1,4 +1,4 @@
-package com.company.BehaivoursPack.FMS;
+package com.company.FSMBehaviuors;
 
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
@@ -23,7 +23,7 @@ public class EsperarRespuesta extends Behaviour {
                 if (msg.getPerformative() == ACLMessage.REJECT_PROPOSAL){    //corregirlo en IntelliJ
                     this.respuesta = 1;
                 } else {
-                    this.respueta = -1;
+                    this.respuesta = -1;
                     System.out.println("El mensaje recibido no acepta ni rechaza mi propuesta");
                 }
             }

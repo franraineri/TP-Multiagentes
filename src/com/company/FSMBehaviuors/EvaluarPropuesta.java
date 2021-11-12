@@ -1,6 +1,13 @@
-package beh;
+package com.company.FSMBehaviuors;
 
+import com.company.Ontologias.PedirComida;
+import jade.content.ContentElement;
+import jade.content.lang.Codec;
+import jade.content.onto.OntologyException;
+import jade.content.onto.UngroundedException;
 import jade.core.behaviours.Behaviour;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 
 public class EvaluarPropuesta extends Behaviour {
 
@@ -28,7 +35,7 @@ public class EvaluarPropuesta extends Behaviour {
 
 		ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.PROPOSE));
 
-		if(msg!=null){
+		if(msg!=null){		///REVISARLO CON ARIEL
 
 			ContentElement ce;
 			
@@ -36,9 +43,9 @@ public class EvaluarPropuesta extends Behaviour {
 			
 				try{
 					ce = myAgent.getContentManager().extractContent(msg);
-					PedirComida comidaObj =  ce;
+					PedirComida comidaObj = (PedirComida) ce;
 					double otraPonderacion = comidaObj.getComida().ponderacionComida();
-					ACLMessage resp = msg.createRe ply();
+					ACLMessage resp = msg.createReply();
 					
 					if ( (double)getDataStore().get("ponderation_last_propose") > otraPonderacion ){
 						
@@ -55,15 +62,20 @@ public class EvaluarPropuesta extends Behaviour {
 						resp.setContent("El agente "+ myAgent.getAID()+ " acepto la comida. ");
 						this.event = 1;
 
-						}				
-					myAgent().send(resp);
-					}}
-					catch (CodecException | OntolontologyException){
-						e.printStackTrace();
+						}
+					myAgent.send(resp);
+					} catch (OntologyException e) {
+					e.printStackTrace();
+				} catch (Codec.CodecException e) {
+					e.printStackTrace();
 				}
 			}
-		}else{
-			
+				//catch ( CodecException | OntolontologyException e){
+				//		e.printStackTrace();
+				//}
+			}
+		else{
+			System.out.println("agregar algo aca");
 		}
 
 
