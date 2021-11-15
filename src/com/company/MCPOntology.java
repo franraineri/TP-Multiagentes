@@ -9,10 +9,10 @@ import jade.content.schema.PrimitiveSchema;
 public class MCPOntology extends Ontology {
 	private static final long serialVersionUID = 314831391539979184L;
 
-	// Nombre de la ontologï¿½a
+	// Nombre de la ontología
 	public static final String ONTOLOGY_NAME = "ontologia-negociacion-comida";
 	
-	// Constantes, nombres de los esquemas y los slots (atributos) de la ontologï¿½a 
+	// Constantes, nombres de los esquemas y los slots (atributos) de la ontología 
 	public static final String COMIDA = "comida";
 	public static final String PEDIR_COMIDA = "pedir-comida";
 	private static final String NOMBRE_COMIDA = "nombre";
@@ -35,7 +35,7 @@ public class MCPOntology extends Ontology {
 			
 			ConceptSchema cs = new ConceptSchema(COMIDA);
 			cs.add(NOMBRE_COMIDA, (PrimitiveSchema)getSchema(BasicOntology.STRING), PrimitiveSchema.MANDATORY);
-			cs.add(TIPO_COMIDA, (PrimitiveSchema)getSchema(BasicOntology.STRING), PrimitiveSchema.OPTIONAL);
+			cs.add(TIPO_COMIDA, (PrimitiveSchema)getSchema(BasicOntology.DATE), PrimitiveSchema.OPTIONAL);
 			cs.add(INGREDIENTES, (PrimitiveSchema)getSchema(BasicOntology.STRING), PrimitiveSchema.OPTIONAL);
 			add(cs, Comida.class);
 			
@@ -47,7 +47,7 @@ public class MCPOntology extends Ontology {
 			PredicateSchema ps = new PredicateSchema(ES_MI_ZEUTHEN);
 			ps.add(VALOR, (PrimitiveSchema)getSchema(BasicOntology.FLOAT), PrimitiveSchema.MANDATORY);
 			add(ps, EsMiZeuthen.class);
-
+			// Movie, SeeMovie, e IsMyZeuthen son las clases que implementan los esquemas de la ontología
 		}
 		catch (Exception e) {
 			e.printStackTrace();
