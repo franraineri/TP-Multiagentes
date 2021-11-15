@@ -1,7 +1,6 @@
-package com.company.FSMBehaviuors;
+package beh;
 
 
-import com.company.FSMBehaviuors.FSM;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;

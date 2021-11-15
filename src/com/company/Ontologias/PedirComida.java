@@ -1,5 +1,3 @@
-package com.company.Ontologias;
-
 import jade.content.AgentAction;
 
 public class PedirComida implements AgentAction {

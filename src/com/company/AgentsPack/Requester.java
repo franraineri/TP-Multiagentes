@@ -1,10 +1,8 @@
 package com.company.AgentsPack;
 
-import com.company.FSMBehaviuors.FSM;
-import jade.content.lang.Codec;
-import jade.content.lang.sl.SLCodec;
-import jade.content.onto.Ontology;
+import com.company.BehaivoursPack.FMS.MyFSM;
 import jade.core.Agent;
+import behaviours.NumberInitiatorBehaviour;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.domain.DFService;
@@ -13,7 +11,7 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import jade.proto.SubscriptionInitiator;
-import com.company.Ontologias.*;
+
 
 public class Requester extends Agent {
     
@@ -31,24 +29,26 @@ public class Requester extends Agent {
 		template.addServices(sd);
 		    
         getContentManager().registerLanguage(codec);
-        getContentManager().registerOntology(MCP);
+        getContentgetContentManager().registerOregisterOntology(MCP);
 
         try {
 			DFAgentDescription[] result = DFService.search(this, template);
-			if (result.length > 0) {
+			if (result.length > 0)
                 System.out.println("Found the following agents:" + result[0].getName());
-                this.addBehaviour(new FSM(getAID(), true));
-            } else {
-				addBehaviour( new SubscriptionInitiator( this,
+                this.addBehaviour(new MyFSM(result[0].getName()));
+			else {
+				addBehaviour( new SubscriptionInitiator( this, 
 						        DFService.createSubscriptionMessage( this, getDefaultDF(), 
-								template, null))
-                                {
+								template, null)) 
+                            {
                                 protected void handleInform(ACLMessage inform) {
                                     try {
-                                        DFAgentDescription[] result =
+                                        DFAgentDescription[] result =         
                                             DFService.decodeNotification(inform.getContent());
                                         if (result[0].getAllServices().hasNext())
                                             addBehaviour(new NumberInitiatorBehaviour(result[0].getName()));
+                                        
+                                        
                                     }
                                     catch (FIPAException fe) {fe.printStackTrace(); }
                                 }

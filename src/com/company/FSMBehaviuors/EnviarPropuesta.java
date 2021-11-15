@@ -1,10 +1,5 @@
-package com.company.FSMBehaviuors;
+package com.company.BehaivoursPack.FMS;
 
-import com.company.Ontologias.EsMiZeuthen;
-import com.company.Ontologias.MCPOntology;
-import jade.content.lang.Codec;
-import jade.content.lang.sl.SLCodec;
-import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
@@ -13,10 +8,7 @@ import java.util.ArrayList;
 
 public class EnviarPropuesta extends Behaviour {
 
-    private Codec codec = new SLCodec();;
-    private MCPOntology ontology = new MCPOntology();
-
-    public void Proponer( ) {
+    public Proponer( ) {
 
     }
 
@@ -25,7 +17,7 @@ public class EnviarPropuesta extends Behaviour {
         // Armo el mensaje
         ACLMessage propuesta = new ACLMessage(ACLMessage.REQUEST);
         ArrayList <String> comidas = (ArrayList<String>) this.getDataStore().get("comidas");
-
+        
         propuesta.addReceiver(new AID("DES HARDcordear",AID.ISLOCALNAME));  //utilizar el df
         propuesta.setLanguage(codec.getName()); //seteamos el codec y la ontologia que usaremos
         propuesta.setOntology(ontology.getName());
@@ -37,13 +29,7 @@ public class EnviarPropuesta extends Behaviour {
             //propuesta.setContent( "Te prepongo pedir para comer " + comidas.remove((int) (Math.random() * comidas.size())));
 
             //seteamos el contenido del mensaje con la comida que queremos pedir
-            try {
-                myAgent.getContentManager().fillContent(propuesta, new EsMiZeuthen());
-            } catch (Codec.CodecException e) {
-                e.printStackTrace();
-            } catch (OntologyException e) {
-                e.printStackTrace();
-            }
+            getContentManager.fillContent(propuesta, new EsMiZeuthen(  );
         }
         else {
 

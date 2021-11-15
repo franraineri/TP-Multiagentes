@@ -1,4 +1,4 @@
-package com.company.FSMBehaviuors;
+package beh;
 
 import jade.core.AID;
 import jade.core.behaviours.DataStore;
