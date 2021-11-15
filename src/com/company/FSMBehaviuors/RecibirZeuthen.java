@@ -2,8 +2,6 @@ package com.company.FSMBehaviuors;
 
 import com.company.Ontologias.EsMiZeuthen;
 import jade.content.ContentElement;
-import jade.content.lang.Codec;
-import jade.content.onto.OntologyException;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -11,25 +9,19 @@ import jade.lang.acl.MessageTemplate;
 public class RecibirZeuthen extends Behaviour {
 
 	private Boolean recibido= false;
-	private int on_end = -1;
+
 
 	@Override
 	public void action() {
 
-		MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
+		MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM)
 
 		// Si recibo un mensaje
-		ACLMessage zeuthen_msg = getAgent().receive(mt);
+		ACLMessage zeuthen_msg = getAgent().blockingReceive(mt);
+
 
 		if (zeuthen_msg != null) { // Si recibi el mensaje, lo proceso
-			ContentElement ce = null; //extraigo el contenido del mensaje
-			try {
-				ce = myAgent.getContentManager().extractContent(zeuthen_msg);
-			} catch (Codec.CodecException e) {
-				e.printStackTrace();
-			} catch (OntologyException e) {
-				e.printStackTrace();
-			}
+			ContentElement ce = myAgent.(zeuthen_msg); //extraigo el contenido del mensaje
 			EsMiZeuthen zeuthen_adversario = (EsMiZeuthen) ce;
 
 			System.out.println("El agente " + myAgent.getLocalName() + " recibio la propuesta de " + zeuthen_msg.getSender().getLocalName());
@@ -42,12 +34,16 @@ public class RecibirZeuthen extends Behaviour {
 			//si mi zeuthen es mayor, espero por la proxima propuesta, 
 
 
-			if ( zeuthen_adversario.getZeuthen() > (float) getDataStore().get("zeuthen_actual")) {
+			if (zeuthen_adversario.getZeuthen() > zeuthen.getValor()) {
 				System.out.println("El agente " + myAgent.getLocalName() + " recibio la propuesta de " + zeuthen_msg.getSender().getLocalName() + " y le responde que no le gusta");
-				on_end = 1;
+				ACLMessage msg = new ACLMessage(ACLMessage.REFUSE);
+				msg.addReceiver(zeuthen_msg.getSender());
+				myAgent.send(msg);
 			} else {
 				System.out.println("El agente " + myAgent.getLocalName() + " recibio la propuesta de " + zeuthen_msg.getSender().getLocalName() + " y le responde que le gusta");
-				on_end = 0;
+				ACLMessage msg = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+				msg.addReceiver(zeuthen_msg.getSender());
+				myAgent.send(msg);
 			}
 
 		}
@@ -55,20 +51,11 @@ public class RecibirZeuthen extends Behaviour {
 			block(); 	// Si no lo recibi, se bloquea el comportamiento
 	}
 
-	@Override
-	public int onEnd(){
-		return on_end;
-	}
 
 	@Override
 	public boolean done() {
 		// TODO Auto-generated method stub
-		return recibido;
-	}
-
-	@Override
-	public void reset() {
-		recibido = false;
+		return false;
 	}
 
 }

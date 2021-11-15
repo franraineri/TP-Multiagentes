@@ -12,19 +12,14 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 
-import java.util.HashMap;
-import java.util.Map;
 
-
-public class Responder extends AgenteNegociador {
+public class Responder extends Agent {
 
 	private Codec codec = new SLCodec();
 	private Ontology mcp = MCPOntology.getInstance();
 
-
 	@Override
 	protected void setup() {
-
 		getContentManager().registerLanguage(codec);
 		getContentManager().registerOntology(mcp);
 

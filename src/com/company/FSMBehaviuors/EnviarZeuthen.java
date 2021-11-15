@@ -1,7 +1,6 @@
 package com.company.FSMBehaviuors;
 
 import com.company.Ontologias.EsMiZeuthen;
-import com.company.Ontologias.MCPOntology;
 import jade.content.lang.Codec;
 import jade.content.onto.OntologyException;
 import jade.core.AID;
@@ -18,15 +17,14 @@ public class EnviarZeuthen extends Behaviour {
 
 		ACLMessage propuesta = new ACLMessage(ACLMessage.INFORM);
 		propuesta.addReceiver((AID) getDataStore().get(FSM.AID_OPONENTE));
-		propuesta.setOntology(MCPOntology.getInstance().getName());
+		propuesta.setOntology(myAgent.getContentManager().getOntology().getName());
 
 		try {
 			EsMiZeuthen zeuthen = new EsMiZeuthen();
-			zeuthen.setZeuthen(((float)getDataStore().get("ponderation_last_propose") - (float)getDataStore().get("") ) / (float)getDataStore().get("diferencia_ponderaciones"));
-			getDataStore().put("zeuthen_actual", zeuthen.getZeuthen());
+			zeuthen.setZeuthen(((float)getDataStore().get("ponderation_last_propose") - (float)getDataStore().get("menor_ponderacion") ) / (float)getDataStore().get("diferencia_ponderaciones"));
 			myAgent.getContentManager().fillContent(propuesta, zeuthen); 	//joaquin
 			myAgent.send(propuesta);
-
+			
 			////myAgent.getContentManager().fillContent(myAgent.getCurrentMessage(), zeuthen); //verificar esta linea
 		}
 		catch ( Codec.CodecException | OntologyException e ) {

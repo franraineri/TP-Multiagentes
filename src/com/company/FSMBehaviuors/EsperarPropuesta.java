@@ -28,7 +28,7 @@ public class EsperarPropuesta extends Behaviour {
 			System.out.println("El agente " + myAgent.getLocalName() + " recibio la propuesta de " + msg.getSender().getLocalName());
 			
 			//save the message in the agent datastore
-			getDataStore().put("last_message", msg);
+			getDataStore().put("propuesta", msg);
 			
 			recibido = true;
 			System.out.println("Mensaje Recibido: '" + zeuthen + "'");
