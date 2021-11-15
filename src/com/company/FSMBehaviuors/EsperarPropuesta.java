@@ -3,30 +3,15 @@ package beh;
 import jade.core.behaviours.Behaviour;
 
 public class EsperarPropuesta extends Behaviour {
-//debe esperar una propuesta de el adversario y guardarla en el datastore
 
 	@Override
 	public void action() {
 		// Recibo un mensaje
-		//ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
-		
-		//defino el template del mensaje
-		
-		MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST)
-
-		// Si recibo un mensaje
-		ACLMessage msg = blockingReceive(mt);
-
+		ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
 
 		if (msg != null) { // Si recibi el mensaje, lo proceso
-
-			System.out.println("El agente " + getLocalName() + " recibio la propuesta de " + msg.getSender().getLocalName());
-			
-			//save the message in the agent datastore
-			getDataStore().put("propuesta", msg);
-			
 			recibido = true;
-			System.out.println("Mensaje Recibido: '" + zeuthen + "'");
+			System.out.println("Mensaje Recibido: '" + msg.getContent() + "'");
 		}
 		else
 			block(); 	// Si no lo recibi, se bloquea el comportamiento
