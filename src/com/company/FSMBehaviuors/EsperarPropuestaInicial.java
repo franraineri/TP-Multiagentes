@@ -1,7 +1,6 @@
 package com.company.FSMBehaviuors;
 
 
-import com.company.FSMBehaviuors.FSM;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -11,7 +10,9 @@ public class EsperarPropuestaInicial extends CyclicBehaviour {
 
 	@Override
 	public void action() {
-		
+
+		System.out.println("Esperando propuesta inicial");
+
 		// Solo recibimos mensajes PROPOSE iniciales
 		ACLMessage prop_ini = myAgent.receive(MessageTemplate.and(
 						MessageTemplate.MatchPerformative(ACLMessage.PROPOSE), 

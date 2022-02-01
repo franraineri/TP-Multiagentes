@@ -1,9 +1,7 @@
 package com.company.FSMBehaviuors;
 
 import com.company.AgentsPack.AgenteNegociador;
-import com.company.Ontologias.EsMiZeuthen;
-import com.company.Ontologias.MCPOntology;
-import com.company.Ontologias.PedirComida;
+import com.company.Ontologias.*;
 import jade.content.lang.Codec;
 import jade.content.lang.sl.SLCodec;
 import jade.content.onto.OntologyException;
@@ -16,8 +14,8 @@ import java.util.ArrayList;
 
 public class EnviarPropuesta extends Behaviour {
 
-    private Codec codec = new SLCodec();;
-    private MCPOntology ontology = new MCPOntology();
+    protected Codec codec = new SLCodec();;
+    protected MCPOntology ontology = new MCPOntology();
 
     public void Proponer( ) {
 
@@ -25,6 +23,7 @@ public class EnviarPropuesta extends Behaviour {
 
     @Override
     public void action() {
+        System.out.println("Se inicia la accion de enviar propuesta");
         // Armo el mensaje
         ACLMessage propuesta = new ACLMessage(ACLMessage.REQUEST);
 
@@ -43,9 +42,7 @@ public class EnviarPropuesta extends Behaviour {
             try {
                 myAgent.getContentManager().fillContent( propuesta, new Action(aid, new PedirComida( ((AgenteNegociador) myAgent).getProximaComida() ) ));
                 myAgent.send(propuesta);
-            } catch (Codec.CodecException e) {
-                e.printStackTrace();
-            } catch (OntologyException e) {
+            } catch (Codec.CodecException | OntologyException e) {
                 e.printStackTrace();
             }
         }

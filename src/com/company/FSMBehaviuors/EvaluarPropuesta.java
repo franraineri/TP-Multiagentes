@@ -1,6 +1,6 @@
 package com.company.FSMBehaviuors;
 
-import com.company.Ontologias.PedirComida;
+import com.company.Ontologias.*;
 import jade.content.ContentElement;
 import jade.content.lang.Codec;
 import jade.content.onto.OntologyException;
@@ -11,8 +11,8 @@ import jade.lang.acl.MessageTemplate;
 
 public class EvaluarPropuesta extends Behaviour {
 
-	private boolean flag = false; //marca que mi ponderacion es menor que la de la propuesta
-	private int event;
+	protected boolean flag = false; //marca que mi ponderacion es menor que la de la propuesta
+	protected int event;
 	@Override
 	public void action() {
 
@@ -49,9 +49,7 @@ public class EvaluarPropuesta extends Behaviour {
 
 						}
 					myAgent.send(resp);
-					} catch (OntologyException e) {
-					e.printStackTrace();
-				} catch (Codec.CodecException e) {
+					} catch (OntologyException | Codec.CodecException e) {
 					e.printStackTrace();
 				}
 			}

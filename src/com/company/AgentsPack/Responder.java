@@ -1,8 +1,6 @@
 package com.company.AgentsPack;
-
-import com.company.FSMBehaviuors.EsperarPropuestaInicial;
-import com.company.FSMBehaviuors.FSM;
-import com.company.Ontologias.MCPOntology;
+import com.company.FSMBehaviuors.*;
+import com.company.Ontologias.*;
 import jade.content.lang.Codec;
 import jade.content.lang.sl.SLCodec;
 import jade.content.onto.Ontology;
@@ -18,8 +16,8 @@ import java.util.Map;
 
 public class Responder extends AgenteNegociador {
 
-	private Codec codec = new SLCodec();
-	private Ontology mcp = MCPOntology.getInstance();
+	protected Codec codec = new SLCodec();
+	protected Ontology mcp = MCPOntology.getInstance();
 
 
 	@Override
@@ -40,11 +38,11 @@ public class Responder extends AgenteNegociador {
 		
 		try {	// Registra el agente en el DF
 			DFService.register(this, dfd);
+			System.out.println("Se registro el agente responder");
 		}
 		catch (FIPAException fe) {
 			fe.printStackTrace();
 		}
-
 		this.addBehaviour(new EsperarPropuestaInicial());
 	}
 

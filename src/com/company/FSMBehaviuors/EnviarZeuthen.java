@@ -1,7 +1,6 @@
 package com.company.FSMBehaviuors;
 
-import com.company.Ontologias.EsMiZeuthen;
-import com.company.Ontologias.MCPOntology;
+import com.company.Ontologias.*;
 import jade.content.lang.Codec;
 import jade.content.onto.OntologyException;
 import jade.core.AID;

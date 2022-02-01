@@ -1,6 +1,6 @@
 package com.company.AgentsPack;
 
-import com.company.FSMBehaviuors.FSM;
+import com.company.FSMBehaviuors.*;
 import jade.content.lang.Codec;
 import jade.content.lang.sl.SLCodec;
 import jade.content.onto.Ontology;
@@ -18,8 +18,8 @@ import java.util.Map;
 
 public class Requester extends AgenteNegociador {
     
-    private Codec codec = new SLCodec();
-    private Ontology MCP = MCPOntology.getInstance();
+    protected Codec codec = new SLCodec();
+    protected Ontology MCP = MCPOntology.getInstance();
 
     @Override
     protected void setup(){
@@ -39,6 +39,7 @@ public class Requester extends AgenteNegociador {
 			if (result.length > 0) {
                 System.out.println("Found the following agents:" + result[0].getName());
                 this.addBehaviour(new FSM(result[0].getName(), true));
+                System.out.println("Se agrego el comportamiento al agente Requester");
 
             } else {
 				addBehaviour( new SubscriptionInitiator( this,
@@ -51,6 +52,7 @@ public class Requester extends AgenteNegociador {
                                             DFService.decodeNotification(inform.getContent());
                                         if (result[0].getAllServices().hasNext())
                                             addBehaviour(new FSM(result[0].getName(), true));
+                                        System.out.println("Se agrego el comportamiento y se suscribio el agente");
                                     }
                                     catch (FIPAException fe) {fe.printStackTrace(); }
                                 }
@@ -62,14 +64,15 @@ public class Requester extends AgenteNegociador {
 
     @Override
     protected void takeDown() {
-        //el agente de des subscribe del DF
-		try {
-			DFService.deregister(this);
-		}
-		catch (FIPAException fe) {
-			fe.printStackTrace();
-		}
+
         System.out.println("Apagando agente Requester");
+        //el agente de des subscribe del DF
+        try {
+            DFService.deregister(this);
+        }
+		catch (FIPAException fe) {
+            fe.printStackTrace();
+        }
         super.takeDown();
     }
 }

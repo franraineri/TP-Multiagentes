@@ -1,6 +1,6 @@
 package com.company.AgentsPack;
 
-import com.company.Ontologias.Comida;
+import  com.company.Ontologias.*;
 import jade.core.Agent;
 
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class AgenteNegociador extends Agent{
 
-    private Map<Comida, Float> utilidades = new HashMap<Comida, Float>();
-    private ArrayList<Comida> comidas_pedidas = new ArrayList<Comida>();
+    protected Map<Comida, Float> utilidades = new HashMap<Comida, Float>();
+    protected ArrayList<Comida> comidas_pedidas = new ArrayList<Comida>();
 
     public double getUtilidad(String name){
         return utilidades.get(name);

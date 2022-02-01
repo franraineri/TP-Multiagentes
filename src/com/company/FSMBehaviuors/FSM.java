@@ -20,10 +20,10 @@ public class FSM extends FSMBehaviour{
 
 
 	// CONTRUCTOR DEL INICIATOR
-	public FSM(AID aid, boolean iniciador) {
+	public FSM(AID aid, boolean requester) {
 		DataStore ds = new DataStore();
 		ds.put(AID_OPONENTE, aid);	//creo el data store y agrego el id de mi oponente
-		this.crearFSM(ds, iniciador);
+		this.crearFSM(ds, requester);
 	}
 	
 	// CONSTRUCTOR DEL RESPONDER
@@ -33,7 +33,7 @@ public class FSM extends FSMBehaviour{
 		this.crearFSM(ds, false);
 	}
 
-	private void crearFSM(DataStore ds, boolean iniciador) {
+	private void crearFSM(DataStore ds, boolean requester) {
 
 		// Instanciamos los comportamientos de la maquina de estados
 		EnviarPropuesta enviar_propuesta = new EnviarPropuesta();
@@ -61,13 +61,15 @@ public class FSM extends FSMBehaviour{
 		conflicto.setDataStore(ds);
 
 		// Definimos los estados de la FSM
-		if (iniciador) { // Es el agente iniciador
+		if (requester) { // Es el agente requester
 			this.registerFirstState(enviar_propuesta, ENVIAR_PROPUESTA);
 			this.registerState(evaluar_propuesta, EVALUAR_PROPUESTA);
+			System.out.println("Se agrega el comportamiento especifico del requester dentro del FSM");
 		}
 		else { // Es el agente Responder
 			this.registerFirstState(evaluar_propuesta, EVALUAR_PROPUESTA);
 			this.registerState(enviar_propuesta, ENVIAR_PROPUESTA);
+			System.out.println("Se agrega el comportamiento especifico del responder dentro del FSM");
 		}
 		
 		this.registerState(esperar_respuesta, ESPERAR_RESPUESTA);

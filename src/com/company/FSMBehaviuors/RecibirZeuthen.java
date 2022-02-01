@@ -1,6 +1,6 @@
 package com.company.FSMBehaviuors;
 
-import com.company.Ontologias.EsMiZeuthen;
+import com.company.Ontologias.*;
 import jade.content.ContentElement;
 import jade.content.lang.Codec;
 import jade.content.onto.OntologyException;
@@ -25,9 +25,7 @@ public class RecibirZeuthen extends Behaviour {
 			ContentElement ce = null; //extraigo el contenido del mensaje
 			try {
 				ce = myAgent.getContentManager().extractContent(zeuthen_msg);
-			} catch (Codec.CodecException e) {
-				e.printStackTrace();
-			} catch (OntologyException e) {
+			} catch (Codec.CodecException | OntologyException e) {
 				e.printStackTrace();
 			}
 			EsMiZeuthen zeuthen_adversario = (EsMiZeuthen) ce;
@@ -42,7 +40,8 @@ public class RecibirZeuthen extends Behaviour {
 			//si mi zeuthen es mayor, espero por la proxima propuesta, 
 
 
-			if ( zeuthen_adversario.getZeuthen() > (float) getDataStore().get("zeuthen_actual")) {
+			assert zeuthen_adversario != null;
+			if (zeuthen_adversario.getZeuthen() > (float) getDataStore().get("zeuthen_actual")) {
 				System.out.println("El agente " + myAgent.getLocalName() + " recibio la propuesta de " + zeuthen_msg.getSender().getLocalName() + " y le responde que no le gusta");
 				on_end = 1;
 			} else {

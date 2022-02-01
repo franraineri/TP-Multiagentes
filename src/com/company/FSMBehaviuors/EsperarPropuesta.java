@@ -15,7 +15,9 @@ public class EsperarPropuesta extends Behaviour {
 		//ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
 		
 		//defino el template del mensaje
-		
+
+		System.out.println("Se espera una propuesta....");
+
 		MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
 
 		// Si recibo un mensaje

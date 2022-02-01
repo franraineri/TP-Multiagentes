@@ -7,6 +7,7 @@ import jade.content.schema.AgentActionSchema;
 import jade.content.schema.ConceptSchema;
 import jade.content.schema.PredicateSchema;
 import jade.content.schema.PrimitiveSchema;
+import com.company.Ontologias.*;
 
 public class MCPOntology extends Ontology {
 	private static final long serialVersionUID = 314831391539979184L;
@@ -24,8 +25,8 @@ public class MCPOntology extends Ontology {
 	private static final String ES_MI_ZEUTHEN = "es-mi-zeuthen";
 	private static final String VALOR = "valor";
 	
-	private static Ontology instance = new MCPOntology();
-	private static SLCodec codecInstance = new SLCodec();
+	protected static Ontology instance = new MCPOntology();
+	protected static SLCodec codecInstance = new SLCodec();
 	
 	public static Ontology getInstance() { return instance; }
 	

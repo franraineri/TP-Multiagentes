@@ -7,10 +7,6 @@ public class Comida implements Concept{
     private String nombre_comida;
     private String tipo_comida;
     private String ingredientes;
-    public Comida(){
-        
-    }
-    
     public Comida(String nombre_comida, String tipo_comida, String ingredientes){
         this.nombre_comida = nombre_comida;
         this.tipo_comida = tipo_comida;
