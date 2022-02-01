@@ -1,0 +1,8 @@
+*.idea 
+.idea 
+*cache*
+/out
+out
+out*
+*.class
+*.jar
