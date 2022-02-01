@@ -6,7 +6,7 @@ public class Acuerdo extends Behaviour {
 
 	@Override
 	public void action() {
-		System.out.println("Llegamos a un acuerdo");
+		System.out.println("Los agente llegamos a un acuerdo, finaliza la negociación");
 	}
 
 	@Override

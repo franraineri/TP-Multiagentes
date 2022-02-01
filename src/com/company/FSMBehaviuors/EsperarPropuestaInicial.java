@@ -11,7 +11,7 @@ public class EsperarPropuestaInicial extends CyclicBehaviour {
 	@Override
 	public void action() {
 
-		System.out.println("Esperando propuesta inicial");
+		System.out.println("El agente " + myAgent.getLocalName() + " está esperando una propuesta inicial");
 
 		// Solo recibimos mensajes PROPOSE iniciales
 		ACLMessage prop_ini = myAgent.receive(MessageTemplate.and(
@@ -20,6 +20,7 @@ public class EsperarPropuestaInicial extends CyclicBehaviour {
 		
 		if (prop_ini != null) {
 			myAgent.addBehaviour(new FSM(prop_ini));
+			System.out.println("Se recibió una propuesta inicial");
 		}
 		else
 			block();

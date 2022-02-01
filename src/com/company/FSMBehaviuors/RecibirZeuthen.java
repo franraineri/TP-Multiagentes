@@ -30,15 +30,13 @@ public class RecibirZeuthen extends Behaviour {
 			}
 			EsMiZeuthen zeuthen_adversario = (EsMiZeuthen) ce;
 
-			System.out.println("El agente " + myAgent.getLocalName() + " recibio la propuesta de " + zeuthen_msg.getSender().getLocalName());
+			System.out.println("El agente " + myAgent.getLocalName() + " recibio el Zeuthen de " + zeuthen_msg.getSender().getLocalName());
 			
 			//	zeuthen.getValor(); || getPropuesta
 			recibido = true;
-			//System.out.println("Mensaje Recibido: '" + zeuthen + "'");
 
 			//comparamos el valor de zeuthen adversario con el de zeuthen propio
 			//si mi zeuthen es mayor, espero por la proxima propuesta, 
-
 
 			assert zeuthen_adversario != null;
 			if (zeuthen_adversario.getZeuthen() > (float) getDataStore().get("zeuthen_actual")) {

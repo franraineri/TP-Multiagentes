@@ -18,10 +18,14 @@ public class EsperarRespuesta extends Behaviour {
             
             if (msg.getPerformative() == ACLMessage.ACCEPT_PROPOSAL)    //corregirlo en IntelliJ
                 this.respuesta = 0;
+                System.out.println("El mensaje recibido ACEPTA mi propuesta");
+
                 // this.reset();  //probar en intelli J
             else { 
                 if (msg.getPerformative() == ACLMessage.REJECT_PROPOSAL){    //corregirlo en IntelliJ
                     this.respuesta = 1;
+                    System.out.println("El mensaje recibido RECHAZA mi propuesta");
+
                 } else {
                     this.respuesta = -1;
                     System.out.println("El mensaje recibido no acepta ni rechaza mi propuesta");

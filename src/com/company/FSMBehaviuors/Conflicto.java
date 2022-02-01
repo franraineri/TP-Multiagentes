@@ -6,7 +6,7 @@ public class Conflicto extends Behaviour {
 
 	@Override
 	public void action() {
-		System.out.println("No hay acuerdo");
+		System.out.println("No hay acuerdo, finaliza la negociación");
 
 	}
 

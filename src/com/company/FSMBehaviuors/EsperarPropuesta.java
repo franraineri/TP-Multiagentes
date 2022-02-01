@@ -16,24 +16,21 @@ public class EsperarPropuesta extends Behaviour {
 		
 		//defino el template del mensaje
 
-		System.out.println("Se espera una propuesta....");
+		System.out.println("El agente "+ myAgent.getLocalName() + " espera una propuesta...");
 
 		MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
 
 		// Si recibo un mensaje
-		ACLMessage msg = myAgent.blockingReceive(mt);	//CHEQUEAR
-		// blockingReceive(mt);
-
+		ACLMessage msg = myAgent.blockingReceive(mt);	
 
 		if (msg != null) { // Si recibi el mensaje, lo proceso
 
 			System.out.println("El agente " + myAgent.getLocalName() + " recibio la propuesta de " + msg.getSender().getLocalName());
-			
+			System.out.println("El mensaje recibido fue: " + msg + "\n")
 			//save the message in the agent datastore
 			getDataStore().put("last_message", msg);
 			
 			recibido = true;
-			System.out.println("Mensaje Recibido: '" + zeuthen + "'");
 		}
 		else
 			block(); 	// Si no lo recibi, se bloquea el comportamiento

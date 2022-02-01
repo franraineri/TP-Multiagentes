@@ -103,6 +103,8 @@ public class FSM extends FSMBehaviour{
 		this.registerTransition(EVALUAR_PROPUESTA, ENVIAR_ZEUTHEN, 0); // Reject
 		this.registerTransition(EVALUAR_PROPUESTA, ACUERDO, 1); // Accept
 		
+		System.out.println("Se instanció el FMS");
+		
 			
 	}
 

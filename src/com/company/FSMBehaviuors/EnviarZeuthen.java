@@ -13,7 +13,7 @@ public class EnviarZeuthen extends Behaviour {
 	public void action() {
 		// TODO Auto-generated method stub
 		//crear mensaje y enviar zeuthen
-		System.out.println("Enviando Zeuthen de el agente: " + myAgent.getLocalName());
+		System.out.println("Enviando el Zeuthen de el agente: " + myAgent.getLocalName());
 
 		ACLMessage propuesta = new ACLMessage(ACLMessage.INFORM);
 		propuesta.addReceiver((AID) getDataStore().get(FSM.AID_OPONENTE));

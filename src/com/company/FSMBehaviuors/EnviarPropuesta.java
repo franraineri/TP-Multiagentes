@@ -23,10 +23,11 @@ public class EnviarPropuesta extends Behaviour {
 
     @Override
     public void action() {
-        System.out.println("Se inicia la accion de enviar propuesta");
+        System.out.println("Se envia una propuesta");
         // Armo el mensaje
         ACLMessage propuesta = new ACLMessage(ACLMessage.REQUEST);
 
+        //TO-DO
         propuesta.addReceiver(new AID("DES HARDcordear",AID.ISLOCALNAME));  //utilizar el df
         propuesta.setLanguage(codec.getName()); //seteamos el codec y la ontologia que usaremos
         propuesta.setOntology(ontology.getName());

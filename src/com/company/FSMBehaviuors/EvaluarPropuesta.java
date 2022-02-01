@@ -20,10 +20,12 @@ public class EvaluarPropuesta extends Behaviour {
 
 		ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.PROPOSE));
 
-		if(msg!=null){		///REVISARLO CON ARIEL
+		if(msg!=null){		
 
 			ContentElement ce;
-			
+
+			System.out.println("El agente " + myAgent.getLocalName() + " está evaluando una propuesta");
+
 			if(msg.getPerformative() == ACLMessage.PROPOSE){
 			
 				try{
@@ -53,12 +55,9 @@ public class EvaluarPropuesta extends Behaviour {
 					e.printStackTrace();
 				}
 			}
-				//catch ( CodecException | OntolontologyException e){
-				//		e.printStackTrace();
-				//}
 			}
 		else{
-			System.out.println("agregar algo aca");
+			System.out.println("Error, la propuesta recibida es NULL");
 		}
 
 
